@@ -13,6 +13,13 @@ namespace BitFour.LojaVirtual.Web
         {
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
+            //criando Url amigavel de rotaPagina
+            routes.MapRoute(
+                name:null,
+               url:"Pagina{pagina}",
+                defaults:new {controller="Vitrine", action="ListaProdutos"}
+                );
+
             routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",

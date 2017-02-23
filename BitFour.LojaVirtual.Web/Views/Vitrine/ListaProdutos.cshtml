@@ -1,51 +1,18 @@
-﻿@model IEnumerable<BitFour.LojaVirtual.Dominio.Entidades.Produto>
+﻿@model BitFour.LojaVirtual.Web.Models.ProdutosViewModel
+@using BitFour.LojaVirtual.Web.HtmlHelpers
+           
 
-@{
-    ViewBag.Title = "ListaProdutos";
+@foreach (var p in Model.Produtos)
+{
+    <div>
+        <h3>
+            @p.NomeProduto
+            @p.Descricao
+            @p.Preco.ToString("c")
+        </h3>
+    </div>
 }
 
-<h2>ListaProdutos</h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.NomeProduto)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Descricao)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Preco)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Categoria)
-        </th>
-        <th></th>
-    </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.NomeProduto)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Descricao)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Preco)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Categoria)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.produtoId }) |
-            @Html.ActionLink("Details", "Details", new { id=item.produtoId }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.produtoId })
-        </td>
-    </tr>
-}
-
-</table>
+@Html.PageLinks(Model.Paginacao, x => Url.Action("ListaProdutos", new {pagina = x }))

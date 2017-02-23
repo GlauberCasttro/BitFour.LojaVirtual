@@ -1,6 +1,13 @@
-﻿using System;
+﻿using BitFour.LojaVirtual.Web.Models;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System;
 using System.Linq;
+using System.Web.Mvc;
+
+
+
+
+
 
 namespace BitFour.LojaVirtual.UnitTest
 {
@@ -12,14 +19,14 @@ namespace BitFour.LojaVirtual.UnitTest
         [TestMethod]
         public void Take()
         {
-            int[] numeros = { 5,4,1,3,9,8,6,7,2,0 };
+            int[] numeros = { 5, 4, 1, 3, 9, 8, 6, 7, 2, 0 };
             var resultado = from num in numeros.Take(2) select num;
             int[] teste = { 5, 4 };
             CollectionAssert.AreEqual(resultado.ToArray(), teste);
         }
 
         //O operador Skip ignora os primeiros n objetos de uma coleção 
-    [TestMethod]
+        [TestMethod]
         public void Skip()
         {
             int[] numeros = { 5, 4, 1, 3, 9, 8, 6, 7, 2, 0 };
@@ -28,6 +35,29 @@ namespace BitFour.LojaVirtual.UnitTest
             int[] teste = { 1, 3, 9 };
             CollectionAssert.AreEqual(resultado.ToArray(), teste);
         }
-       
+
+
+        [TestMethod]
+        public void TestarPaginacaoFuncionando()
+        {
+
+            HtmlHelper html = null;
+            
+
+            Paginacao paginacao = new Paginacao
+            {
+                PaginaAtual = 2,
+                ItensPorPagina = 10,
+                ItensTotal = 2
+            };
+          Func<int, string> paginaUrl = i => "Pagina"+i;
+          //MvcHtmlString result = html.PageLinks(paginacao, paginaUrl);
+
+
+   
+            
+         
+        }
+
     }
 }

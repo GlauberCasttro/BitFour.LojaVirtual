@@ -1,4 +1,5 @@
 ﻿using BitFour.LojaVirtual.Dominio.Repositorio;
+using BitFour.LojaVirtual.Web.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,14 +18,29 @@ namespace BitFour.LojaVirtual.Web.Controllers
         public ActionResult ListaProdutos(int pagina = 1)
         {
             _repositorio = new ProdutosRepositorio();
-            var produtos = _repositorio.Produtos
-                .OrderBy(p => p.Descricao)
+
+           
+
+            ProdutosViewModel model = new ProdutosViewModel{
+
+                  Produtos = _repositorio.Produtos
+                .OrderBy(p => p.produtoId)
                 .Skip((pagina - 1) * ProdutosPorPagina)
-                .Take(ProdutosPorPagina);
+                .Take(ProdutosPorPagina),
+
+                Paginacao = new Paginacao{
+                    PaginaAtual = pagina,
+                    ItensPorPagina = ProdutosPorPagina,
+                    ItensTotal =     _repositorio.Produtos.Count()
+
+                } 
+            };
 
 
 
-            return View(produtos);
+
+
+            return View(model);
         }
     }
 }
